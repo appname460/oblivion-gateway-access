@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure System Access</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Style for the "terminal" look */
+        body {
+            background: black;
+            color: #00FF00;
+            font-family: "Courier New", Courier, monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            line-height: 1.8;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        #terminal {
+            border: 2px solid #00FF00;
+            padding: 20px;
+            width: 90%;
+            height: 400px;
+            overflow: hidden; /* This removes the scrollbar */
+            font-size: 16px;
+            background: #111;
+            border-radius: 10px;
+        }
+
+        /* Optional animations */
+        .line {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Oblivion Gateway Access</h1>
+        <div id="terminal"></div>
+    </div>
+
+    <script>
+        const terminal = document.getElementById("terminal");
+        let simulationComplete = false; // Control flag
+
+        // Function to simulate realistic delays
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Function to safely simulate messages on terminal only if simulation is not complete
+        async function showMessage(message) {
+            if (simulationComplete) return; // Skip messages if simulation is complete
+            const line = document.createElement("div");
+            line.classList.add("line");
+            line.innerText = message;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight; // Auto-scroll to the bottom
+            await delay(50);
+        }
+
+        // Simulate loading bar progress effect with dynamic overwrite
+        async function loadingBar(duration, text) {
+            for (let i = 1; i <= 100; i++) {
+                if (simulationComplete) return; // Stop simulation if complete
+                const message = `${text}... ${i}% complete`;
+                terminal.innerHTML = `<div class="line">${message}</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+                await delay(duration / 100);
+            }
+        }
+
+        // Simulate connection progress
+        async function progress() {
+            await loadingBar(250, "Scanning network ports");
+            await loadingBar(200, "Exploiting vulnerabilities...");
+            await loadingBar(300, "Decrypting network traffic...");
+        }
+
+        // Function to simulate various stages
+        async function stage(stageText, actions, delayTime = 500) {
+            await showMessage(`\n[${stageText}]`);
+            for (const action of actions) {
+                if (simulationComplete) return; // Stop simulation if complete
+                await showMessage(action);
+                await delay(delayTime);
+            }
+            await showMessage("");
+        }
+
+        async function simulate() {
+            await showMessage("Initializing sequence\n");
+            await delay(1000);
+
+            // Stage 1: Loading Tools
+            const toolSetupActions = [
+                "Loading exploit toolkit...",
+                "Installing rootkit...",
+                "Deploying brute-force cracking tools...",
+                "Bypassing encryption protocols...",
+                "Activating proxy servers...",
+                "Initializing brute-force dictionary attack...",
+                "Preparing port scanner...",
+                "Running vulnerability scanner...",
+                "Deploying phishing payloads...",
+                "Setting up botnet communication...",
+                "Loading packet sniffing software...",
+                "Configuring remote-access trojan...",
+                "Activating anti-firewall modules...",
+                "Preparing denial-of-service shield...",
+                "Loading keylogger configurations...",
+                "Deploying buffer overflow payloads..."
+            ];
+            await stage("Preparing Tools", toolSetupActions);
+
+            await progress();
+
+            // Stage 2: System Access Simulation
+            const systemAccessActions = [
+                "Connecting to remote server...",
+                "IP Address traced: 192.168.1.5",
+                "Obtaining system credentials...",
+                "Username found: 'admin'",
+                "Password decrypted: '123456'",
+                "Access granted to system logs...",
+                "Disabling antivirus software...",
+                "Running exploit against outdated kernel...",
+                "Upgrading access level to administrator...",
+                "Disabling firewall defenses...",
+                "Monitoring active user sessions...",
+                "Scanning for connected devices...",
+                "Decrypting security logs...",
+                "Pushing payloads into secure storage...",
+                "Attempting advanced escalation exploit..."
+            ];
+            await stage("Accessing System", systemAccessActions);
+
+            await progress();
+
+            // Stage 3: Data Extraction Simulation
+            const dataExtractionActions = [
+                "Extracting sensitive user data...",
+                "Harvesting social media credentials...",
+                "Decrypting financial transaction history...",
+                "Accessing email account backups...",
+                "Extracting cloud storage credentials...",
+                "Downloading encrypted documents...",
+                "Decrypting proprietary encryption keys...",
+                "Extracting private user communications...",
+                "Analyzing browser cache for saved passwords...",
+                "Decrypting calendar event information...",
+                "Extracting user geolocation data...",
+                "Monitoring microphone and camera streams...",
+                "Copying transaction logs...",
+                "Downloading corporate confidential files...",
+                "Decrypting private photo repositories...",
+                "Scanning Wi-Fi for access keys...",
+                "Mapping private cloud access points..."
+            ];
+            await stage("Extracting Data", dataExtractionActions);
+
+            await delay(2000);
+
+            // Clear the entire terminal content here
+            simulationComplete = true; // Mark simulation as complete
+            terminal.innerHTML = ""; // Clear all messages from terminal
+            // Now show only the final message
+            terminal.innerHTML = "<div class='line'>\n\nSystem fully compromised.\nAll data has been transferred successfully.</div>";
+        }
+
+        simulate();
+    </script>
+</body>
+</html>
